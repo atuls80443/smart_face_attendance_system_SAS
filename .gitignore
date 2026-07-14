@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+.env
+
+.vscode/
+
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Python Distribution
+build/
+dist/
+*.egg-info/
+
+logs/
+*.log
+
+temp/
+tmp/
+
+dataset/
+
+models/
+
+# SQLite Database 
+*.db
