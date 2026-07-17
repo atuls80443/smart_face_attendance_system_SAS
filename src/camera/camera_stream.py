@@ -1,4 +1,5 @@
 import cv2 
+from src.detection.face_detector import detect_faces 
 
 CAMERA_SOURCE = 0
 
@@ -16,6 +17,11 @@ def main():
         if not ret: 
             print("error: failed to grab frame")
             break
+
+        faces = detect_faces(frame)
+
+        for (x,y,w,h) in faces:
+            cv2.rectangle(frame, (x,y), (x +w, y + h), (0, 255, 0), 2)
         
         cv2.imshow("camera feed", frame)
         
