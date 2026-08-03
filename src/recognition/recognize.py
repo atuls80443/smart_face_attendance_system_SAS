@@ -10,7 +10,8 @@ MODEL_PATH = os.path.join("models", "face_recognizer.yml")
 LABELS_PATH = os.path.join("models", "labels.pickle")
 ATTENDANCE_DIR = "attendance"
 CONFIDENCE_THRESHOLD = 55       # lower = stricter match
-VERIFY_SECONDS = 3              # face must be seen continuously this long before marking
+VERIFY_SECONDS = 1.5              # face must be seen continuously this long before marking
+CONFIRM_SECONDS = 1.5        # how long to keep showing attendance marked after marking
 
 def load_model():
     recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -58,6 +59,7 @@ def main():
     # tracks which face we're currently verifying, and since when
     candidate_name = None
     candidate_since = None
+    mark_confirmation = {}  # name, time it was marked, used to hold the confirmation message
 
     print("Recognition started. Press 'q' to quit.")
 
@@ -93,6 +95,12 @@ def main():
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
                 continue
 
+            # if this name was just marked, hold the confirmation message first
+            if name in mark_confirmation and time. time() - mark_confirmation[name] < CONFIRM_SECONDS:
+                cv2.putText(frame, f"{name} - Attendance Marked", (x, y-10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                continue
+            
             # new/different face detected -> restart the verification timer
             if name != candidate_name:
                 candidate_name = name
