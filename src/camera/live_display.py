@@ -5,6 +5,9 @@ from flask import Flask, Response, request, jsonify
 app = Flask(__name__)
 camera = cv2.VideoCapture(0)  
 
+# camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)   # smaller frame = faster everything downstream
+# camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+
 latest_result = {"name": None, "box": None}
 
 def generate_frames():
@@ -13,6 +16,7 @@ def generate_frames():
         if not success:
             break
         ret, buffer = cv2.imencode('.jpg', frame)
+        # ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 60])
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
 
 @app.route('/video')
