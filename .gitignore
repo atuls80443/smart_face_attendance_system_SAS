@@ -38,3 +38,5 @@ models/
 
 # SQLite Database 
 *.db
+
+attendance/
