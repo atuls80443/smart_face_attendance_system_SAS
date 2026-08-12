@@ -116,10 +116,12 @@ def main():
                 if marked:
                     print(f"Attendance marked: {name}")
             else:
-                # still counting down, show progress on screen
-                remaining = VERIFY_SECONDS - elapsed
-                cv2.putText(frame, f"Verifying {name}... {remaining:.1f}s", (x, y - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+                # no text on screen
+                pass 
+                # # still counting down, show progress on screen
+                # remaining = VERIFY_SECONDS - elapsed
+                # cv2.putText(frame, f"Verifying {name}... {remaining:.1f}s", (x, y - 10),
+                #             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
 
         cv2.imshow("Attendance System", frame)
 
