@@ -4,7 +4,7 @@ from flask import Flask, Response, request, jsonify
 
 app = Flask(__name__)
 # camera = cv2.VideoCapture(1)
-camera = cv2.VideoCapture(1, cv2.CAP_DSHOW)  # Gladwin 4K USB camera
+camera = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Gladwin 4K USB camera
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)  
 
