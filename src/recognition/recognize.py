@@ -77,6 +77,7 @@ def main():
 
         for (x, y, w, h) in faces:
             face_crop = gray[y:y+h, x:x+w]
+            face_crop = cv2.equalizeHist(face_crop) # match the lighting normalization used during training
             label_id, confidence = recognizer.predict(face_crop)
 
             if confidence < CONFIDENCE_THRESHOLD:
@@ -109,9 +110,10 @@ def main():
                     print(f"Attendance marked: {name}")
             else:
                 # still counting down, show progress on screen
-                remaining = VERIFY_SECONDS - elapsed
-                cv2.putText(frame, f"Verifying {name}... {remaining:.1f}s", (x, y - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+                # remaining = VERIFY_SECONDS - elapsed
+                # cv2.putText(frame, f"Verifying {name}... {remaining:.1f}s", (x, y - 10),
+                #             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+                pass
 
         cv2.imshow("Attendance System", frame)
 

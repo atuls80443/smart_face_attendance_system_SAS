@@ -32,6 +32,8 @@ def train():
             if img is None:
                 continue
 
+            img = cv2.equalizeHist(img)
+
             faces.append(img)
             labels.append(label_id)
 
