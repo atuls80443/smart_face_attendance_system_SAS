@@ -1,10 +1,13 @@
 import cv2 
 from src.detection.face_detector import detect_faces 
 
-CAMERA_SOURCE = 0
+CAMERA_SOURCE = 1
 
 def main():
-    cap = cv2.VideoCapture(CAMERA_SOURCE)
+    # cap = cv2.VideoCapture(CAMERA_SOURCE)
+    cap = cv2.VideoCapture(CAMERA_SOURCE, cv2.CAP_DSHOW)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
     if not cap.isOpened():
         print("error: could not open camera")
