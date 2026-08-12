@@ -18,9 +18,19 @@ def generate_frames():
         success, frame = camera.read()
         if not success:
             break
-        ret, buffer = cv2.imencode('.jpg', frame)
-        # ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 60])
+        # ret, buffer = cv2.imencode('.jpg', frame)
+        ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 60])
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
+
+# def generate_frames():
+#     while True:
+#         success, frame = camera.read()
+#         if not success:
+#             break
+#         # send a smaller, lower-quality copy to the board so it can keep up in real time
+#         small_frame = cv2.resize(frame, (640, 360))
+#         ret, buffer = cv2.imencode('.jpg', small_frame, [cv2.IMWRITE_JPEG_QUALITY, 60])
+#         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
 
 @app.route('/video')
 def video():
@@ -50,6 +60,17 @@ while True:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv2.putText(frame, latest_result["name"], (x, y - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+    # if latest_result["name"] and latest_result["box"]:
+    #     x, y, w, h = latest_result["box"]
+
+    #     # scale box up from the small 640x360 frame sent to the board, to this frame's real size
+    #     scale_x = frame.shape[1] / 640
+    #     scale_y = frame.shape[0] / 360
+    #     x, y, w, h = int(x * scale_x), int(y * scale_y), int(w * scale_x), int(h * scale_y)
+
+    #     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    #     cv2.putText(frame, latest_result["name"], (x, y - 10),
+    #                 cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
     cv2.imshow("Live Attendance View", frame)
 

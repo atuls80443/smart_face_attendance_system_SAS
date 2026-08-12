@@ -80,6 +80,7 @@ def main():
 
         for (x, y, w, h) in faces:
             face_crop = gray[y:y+h, x:x+w]
+            face_crop = cv2.resize(face_crop, (200, 200))
             face_crop = cv2.equalizeHist(face_crop) # match the lighting normalization used during training
             label_id, confidence = recognizer.predict(face_crop)
 

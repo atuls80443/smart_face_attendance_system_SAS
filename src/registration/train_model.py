@@ -30,6 +30,7 @@ def train():
             img_path = os.path.join(student_dir, img_name)
             img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  
             if img is None:
+                img = cv2.resize(img, (200, 200)) 
                 continue
 
             img = cv2.equalizeHist(img)

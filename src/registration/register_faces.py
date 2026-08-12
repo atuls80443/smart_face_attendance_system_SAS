@@ -32,6 +32,7 @@ def register_face(student_name):
         if key == ord('s') and len(faces) > 0:
             (x, y, w, h) = faces[0]
             face_crop = frame[y:y+h, x:x+w]
+            face_crop = cv2.resize(face_crop, (200, 200))  # fixed size for consistent training
             count += 1
             file_path = os.path.join(student_dir, f"{count}.jpg")
             cv2.imwrite(file_path, face_crop)
