@@ -9,7 +9,10 @@ def register_face(student_name):
     student_dir = os.path.join(DATASET_DIR, student_name)
     os.makedirs(student_dir, exist_ok=True)
 
-    cap = cv2.VideoCapture(1)
+    # cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)  
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     count = 0
 
     print("press s to save a image, q to quit")
