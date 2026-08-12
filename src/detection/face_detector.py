@@ -11,6 +11,7 @@ face_cascade = cv2.CascadeClassifier(CASCADE_PATH)
 
 def detect_faces(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.equalizeHist(gray) # normalize brightness
 
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
 
