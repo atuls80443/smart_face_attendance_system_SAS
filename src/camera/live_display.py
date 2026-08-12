@@ -3,7 +3,7 @@ import threading
 from flask import Flask, Response, request, jsonify
 
 app = Flask(__name__)
-camera = cv2.VideoCapture(0)  
+camera = cv2.VideoCapture(1)  
 
 # camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)   # smaller frame = faster everything downstream
 # camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)

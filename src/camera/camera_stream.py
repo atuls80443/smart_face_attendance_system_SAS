@@ -1,7 +1,7 @@
 import cv2 
 from src.detection.face_detector import detect_faces 
 
-CAMERA_SOURCE = 0
+CAMERA_SOURCE = 1
 
 def main():
     cap = cv2.VideoCapture(CAMERA_SOURCE)

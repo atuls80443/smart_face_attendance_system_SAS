@@ -53,7 +53,7 @@ def mark_attendance(name):
 
 def main():
     recognizer, id_to_name = load_model()
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     # tracks which face we're currently verifying, and since when
     candidate_name = None
